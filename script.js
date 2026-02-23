@@ -12,7 +12,7 @@ tag.src = "https://www.youtube.com/iframe_api";
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-const videoId = 'sK7riqg2_g8'; // Agar Tum Saath Ho (Lofi)
+const videoId = 'f_fW0Cpx9mI'; // Ishq Wala Love
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {

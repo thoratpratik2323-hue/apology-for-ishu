@@ -135,65 +135,10 @@ if (slider) {
             finalMessage.classList.remove('hidden');
             finalMessage.style.display = 'block';
 
-            // Reveal the Gift Button
-            const giftBtn = document.getElementById('gift-btn');
-            if (giftBtn) giftBtn.classList.remove('hidden');
-
             createExplosion();
         }
     });
 }
-
-// Video Modal Logic
-const giftBtn = document.getElementById('gift-btn');
-const modal = document.getElementById('video-modal');
-const closeModal = document.querySelector('.close-modal');
-const video = document.getElementById('jaanu-video');
-
-if (giftBtn && modal) {
-    giftBtn.addEventListener('click', () => {
-        modal.classList.remove('hidden');
-        if (player && player.pauseVideo) {
-            player.pauseVideo();
-            player.mute(); // Double insurance
-        }
-        isPlaying = false;
-        musicToggle.classList.remove('playing');
-        musicText.textContent = "Play Music";
-
-        video.currentTime = 0;
-        video.play();
-    });
-}
-
-// Extra safety: If the video starts playing for any reason, kill the background music
-if (video) {
-    video.addEventListener('play', () => {
-        if (player && player.pauseVideo) {
-            player.pauseVideo();
-            player.mute();
-        }
-        isPlaying = false;
-        musicToggle.classList.remove('playing');
-        musicText.textContent = "Play Music";
-    });
-}
-
-if (closeModal) {
-    closeModal.addEventListener('click', () => {
-        modal.classList.add('hidden');
-        video.pause();
-        // Don't auto-resume to avoid jumpscare, let her click play if she wants
-    });
-}
-
-// Close modal if clicking outside the video
-window.addEventListener('click', (e) => {
-    if (e.target == modal) {
-        modal.classList.add('hidden');
-        video.pause();
-    }
-});
 
 function assignPunishment(type) {
     const text = document.getElementById('punishment-text');

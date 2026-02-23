@@ -264,6 +264,27 @@ h3 {
     opacity: 0.9;
 }
 
+.slider-hint {
+    font-size: 0.8rem;
+    color: var(--secondary);
+    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    animation: bounceHorizontal 2s infinite;
+}
+
+@keyframes bounceHorizontal {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+}
+
 input[type=range] {
     -webkit-appearance: none;
     appearance: none;

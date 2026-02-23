@@ -105,6 +105,11 @@ const finalMessage = document.getElementById('final-message');
 if (slider) {
     slider.addEventListener('input', (e) => {
         if (!isPlaying) startMusic();
+
+        // Hide hint once she starts sliding
+        const hint = document.getElementById('slider-hint');
+        if (hint) hint.style.display = 'none';
+
         const val = e.target.value;
 
         if (val < 25) {

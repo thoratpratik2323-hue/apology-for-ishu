@@ -166,6 +166,19 @@ if (giftBtn && modal) {
     });
 }
 
+// Extra safety: If the video starts playing for any reason, kill the background music
+if (video) {
+    video.addEventListener('play', () => {
+        if (player && player.pauseVideo) {
+            player.pauseVideo();
+            player.mute();
+        }
+        isPlaying = false;
+        musicToggle.classList.remove('playing');
+        musicText.textContent = "Play Music";
+    });
+}
+
 if (closeModal) {
     closeModal.addEventListener('click', () => {
         modal.classList.add('hidden');

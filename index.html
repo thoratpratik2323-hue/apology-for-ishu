@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Dearest Ishika ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Outfit:wght@300;400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Entry Overlay -->
+    <div id="entry-overlay">
+        <div class="overlay-content">
+            <span class="heart-icon">❤️</span>
+            <h2>For My Ishu</h2>
+            <button id="start-btn">Open My Heart</button>
+        </div>
+    </div>
+
+    <!-- Background Music (YouTube Hidden Player) -->
+    <div id="player"
+        style="position: fixed; bottom: 0; left: 0; width: 100px; height: 100px; opacity: 0.01; pointer-events: none; z-index: -1;">
+    </div>
+    </div>
+
+    <div class="music-control" id="music-toggle">
+        <span id="music-icon">🎵</span>
+        <span id="music-text">Play Romantic Song</span>
+    </div>
+
+    <div class="heart-container" id="heart-container"></div>
+
+    <main class="glass-card">
+        <header>
+            <h1 class="cursive">I'm Sorry, My Ishu ❤️</h1>
+            <div class="letter-container">
+                <p class="letter-text">
+                    "I am sorry Ishu yaar... ab kabhi nahi karunga phir se ye sab galtiyan. Hamesha aapko hi puch ke
+                    karunga jo bhi karna hai, and hamesha aapki baat manunga. Time se khana khaunga and aapka poora
+                    dhyan rakhunga. Aapko bahut saara pyaar dunga, please naraz mat hona yaar mera bacha... please khana
+                    kha lo na. <br><br>
+                    We are forever together. Jaise aap bol rahe ho, hum kisi ko pata nahi lagne denge, pakka trust me.
+                    Kisi ko pata nahi chalne dunga, I will manage it all bby. Pakka. Love you! <br><br>
+                    Ab kisi se baat nahi karunga, sirf aapse. Waise bhi aapse hi karta hoon... hamesha sach bolunga
+                    aapse. Aap bhi sab share karna aur please mujhe maaf kar do. Chaho toh koi punishment de do, but
+                    aise sad mat raho bby. My honey wifu... I love you alot!"
+                </p>
+            </div>
+        </header>
+
+        <section class="apology-content">
+            <div class="promise-grid">
+                <div class="promise-item">✅ Ask Ishu First</div>
+                <div class="promise-item">✅ Eat On Time</div>
+                <div class="promise-item">✅ Share Everything</div>
+                <div class="promise-item">✅ Forever Together</div>
+            </div>
+
+            <div class="punishment-section">
+                <h3>Choose My Punishment:</h3>
+                <div class="punishment-btns">
+                    <button class="punish-btn" onclick="assignPunishment('Extra Hugs')">Extra Hugs</button>
+                    <button class="punish-btn" onclick="assignPunishment('Favorite Treat')">Favorite Treat</button>
+                    <button class="punish-btn" onclick="assignPunishment('1 Hour Head Massage')">Head Massage</button>
+                </div>
+                <p id="punishment-text" class="hidden"></p>
+            </div>
+
+            <div class="forgiveness-meter">
+                <h3>Is my Ishu still angry?</h3>
+                <input type="range" min="0" max="100" value="0" id="forgive-slider">
+                <div class="status-display">
+                    <span id="status-emoji">😡</span>
+                    <span id="status-text">Ishu is thinking...</span>
+                </div>
+            </div>
+
+            <div class="love-message hidden" id="final-message">
+                <p>Ab Maan Bhi Jao Na? ❤️</p>
+                <p class="small">I promise to make it up to you with unlimited treats and hugs!</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>Always Yours, <br><strong>Poku</strong></p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

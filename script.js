@@ -14,6 +14,9 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 const videoId = 'f_fW0Cpx9mI'; // Ishq Wala Love
 
+const entryOverlay = document.getElementById('entry-overlay');
+const startBtn = document.getElementById('start-btn');
+
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: '1',
@@ -22,41 +25,50 @@ function onYouTubeIframeAPIReady() {
         playerVars: {
             'autoplay': 1,
             'loop': 1,
-            'playlist': videoId, // Required for looping
-            'controls': 0
+            'playlist': videoId,
+            'controls': 0,
+            'mute': 0, // Keep unmuted
+            'playsinline': 1
         },
         events: {
-            'onReady': onPlayerReady
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
         }
     });
 }
 
-const entryOverlay = document.getElementById('entry-overlay');
-const startBtn = document.getElementById('start-btn');
-
 function onPlayerReady(event) {
     console.log("Music Player Ready");
     event.target.setVolume(100);
+    // Some browsers might allow autoplay if user has high "Media Engagement"
+    event.target.playVideo();
 }
 
-// Start everything when she clicks "Open My Heart"
-startBtn.addEventListener('click', () => {
-    entryOverlay.classList.add('fade-out');
-    if (player && player.playVideo) {
-        startMusic();
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+        isPlaying = true;
+        musicToggle.classList.add('playing');
+        musicText.textContent = "Pause Music";
+        entryOverlay.classList.add('fade-out'); // Auto-fade if it managed to autoplay
     }
-});
+}
 
-// Global interaction listener backup
-document.addEventListener('click', () => {
+// Start everything when she clicks OR touches anywhere
+const handleInteraction = () => {
     if (!isPlaying && player && player.playVideo) {
         startMusic();
+        entryOverlay.classList.add('fade-out');
     }
-}, { once: false });
+};
+
+startBtn.addEventListener('click', handleInteraction);
+document.addEventListener('touchstart', handleInteraction, { once: true });
+document.addEventListener('mousedown', handleInteraction, { once: true });
 
 function startMusic() {
+    player.unMute();
+    player.setVolume(100);
     player.playVideo();
-    player.setVolume(100); // Ensure volume is max
     musicToggle.classList.add('playing');
     musicText.textContent = "Pause Music";
     isPlaying = true;

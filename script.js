@@ -153,7 +153,15 @@ const video = document.getElementById('jaanu-video');
 if (giftBtn && modal) {
     giftBtn.addEventListener('click', () => {
         modal.classList.remove('hidden');
-        if (player) player.pauseVideo(); // Pause the background song
+        if (player && player.pauseVideo) {
+            player.pauseVideo();
+            player.mute(); // Double insurance
+        }
+        isPlaying = false;
+        musicToggle.classList.remove('playing');
+        musicText.textContent = "Play Music";
+
+        video.currentTime = 0;
         video.play();
     });
 }
@@ -162,7 +170,7 @@ if (closeModal) {
     closeModal.addEventListener('click', () => {
         modal.classList.add('hidden');
         video.pause();
-        if (player) player.playVideo(); // Resume the song
+        // Don't auto-resume to avoid jumpscare, let her click play if she wants
     });
 }
 
@@ -171,7 +179,6 @@ window.addEventListener('click', (e) => {
     if (e.target == modal) {
         modal.classList.add('hidden');
         video.pause();
-        if (player) player.playVideo();
     }
 });
 

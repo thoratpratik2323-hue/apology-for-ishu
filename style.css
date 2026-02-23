@@ -265,14 +265,35 @@ h3 {
 }
 
 .slider-hint {
-    font-size: 0.9rem;
-    color: #ffefba;
-    /* Brighter color */
-    margin-bottom: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    animation: bounceHorizontal 1.5s infinite, glowText 2s infinite;
-    text-shadow: 0 0 10px rgba(255, 239, 186, 0.5);
+    background: rgba(255, 77, 109, 0.2);
+    border: 1px solid var(--primary);
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    display: inline-block;
+    animation: pulseHint 1.5s infinite;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes pulseHint {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.4);
+    }
+
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(255, 77, 109, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 77, 109, 0);
+    }
 }
 
 @keyframes glowText {

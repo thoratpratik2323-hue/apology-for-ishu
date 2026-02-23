@@ -12,36 +12,45 @@ tag.src = "https://www.youtube.com/iframe_api";
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-const videoId = 'f_fW0Cpx9mI'; // Ishq Wala Love
+const videoId = '1bXy_3Kq6A8'; // Official 'Ishq Wala Love' - More embed friendly
 
 const entryOverlay = document.getElementById('entry-overlay');
 const startBtn = document.getElementById('start-btn');
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        height: '1',
-        width: '1',
+        height: '360',
+        width: '640',
         videoId: videoId,
         playerVars: {
             'autoplay': 1,
             'loop': 1,
             'playlist': videoId,
             'controls': 0,
-            'mute': 0, // Keep unmuted
-            'playsinline': 1
+            'mute': 0,
+            'playsinline': 1,
+            'origin': window.location.origin
         },
         events: {
             'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange,
+            'onError': onPlayerError
         }
     });
 }
 
+function onPlayerError(e) {
+    console.error("YouTube Player Error:", e);
+    // Try to restart if error
+    if (e.data === 150 || e.data === 101) {
+        console.log("Video not embeddable? Trying fallback...");
+    }
+}
+
 function onPlayerReady(event) {
     console.log("Music Player Ready");
+    event.target.unMute();
     event.target.setVolume(100);
-    // Some browsers might allow autoplay if user has high "Media Engagement"
-    event.target.playVideo();
 }
 
 function onPlayerStateChange(event) {

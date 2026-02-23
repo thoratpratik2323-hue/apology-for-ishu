@@ -7,7 +7,7 @@ const heartContainer = document.getElementById('heart-container');
 // YouTube Music Integration
 let player;
 let isPlaying = false;
-const videoId = '1bXy_3Kq6A8'; // Ishq Wala Love
+const videoId = 'yTqm9nLGByo'; // User's requested song
 
 // Define the global function for YouTube API
 window.onYouTubeIframeAPIReady = function () {

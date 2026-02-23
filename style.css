@@ -324,18 +324,27 @@ input[type=range] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
+    margin: 20px 0;
     background: transparent;
-}
-
-input[type=range]:focus {
-    outline: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 20;
+    display: block;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    border: 1px solid var(--glass-border);
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -479,18 +488,24 @@ button:hover {
 
 #gift-btn {
     background: linear-gradient(45deg, #ffd700, #ff8c00);
-    color: #000;
-    font-size: 1.3rem;
-    padding: 18px 35px;
+    color: #1a0a1a;
+    font-size: 1.2rem;
+    padding: 16px 32px;
     border-radius: 50px;
-    border: 3px solid #fff;
+    border: 4px solid #fff;
     cursor: pointer;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
     animation: bounce 2s infinite;
-    font-weight: 900;
-    margin-top: 25px;
+    font-weight: 800;
+    margin: 20px 0;
     display: inline-block;
-    transition: all 0.3s ease;
+    width: 90%;
+}
+
+.gift-section {
+    margin-top: 10px;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 20px;
 }
 
 #gift-btn:hover {

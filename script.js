@@ -12,15 +12,13 @@ tag.src = "https://www.youtube.com/iframe_api";
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-const videoId = '1bXy_3Kq6A8'; // Official 'Ishq Wala Love' - More embed friendly
-
-const entryOverlay = document.getElementById('entry-overlay');
-const startBtn = document.getElementById('start-btn');
+const videoId = '1bXy_3Kq6A8'; // Ishq Wala Love
 
 function onYouTubeIframeAPIReady() {
+    console.log("YouTube API Ready, creating player...");
     player = new YT.Player('player', {
-        height: '360',
-        width: '640',
+        height: '200',
+        width: '200',
         videoId: videoId,
         playerVars: {
             'autoplay': 1,
@@ -29,6 +27,7 @@ function onYouTubeIframeAPIReady() {
             'controls': 0,
             'mute': 0,
             'playsinline': 1,
+            'enablejsapi': 1,
             'origin': window.location.origin
         },
         events: {
@@ -39,12 +38,20 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
+// Load YouTube API (Moved after the function definition)
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+const entryOverlay = document.getElementById('entry-overlay');
+const startBtn = document.getElementById('start-btn');
+
 function onPlayerError(e) {
     console.error("YouTube Player Error:", e);
-    // Try to restart if error
-    if (e.data === 150 || e.data === 101) {
-        console.log("Video not embeddable? Trying fallback...");
-    }
+    // If it's a blocked error, we might need a different ID, but let's try to un-mute first
+    player.unMute();
+    player.playVideo();
 }
 
 function onPlayerReady(event) {
@@ -58,30 +65,28 @@ function onPlayerStateChange(event) {
         isPlaying = true;
         musicToggle.classList.add('playing');
         musicText.textContent = "Pause Music";
-        entryOverlay.classList.add('fade-out'); // Auto-fade if it managed to autoplay
+        entryOverlay.classList.add('fade-out');
+    }
+}
+
+function startMusic() {
+    if (player && player.playVideo) {
+        player.unMute();
+        player.setVolume(100);
+        player.playVideo();
+        isPlaying = true;
+        musicToggle.classList.add('playing');
+        musicText.textContent = "Pause Music";
     }
 }
 
 // Start everything when she clicks OR touches anywhere
 const handleInteraction = () => {
-    if (!isPlaying && player && player.playVideo) {
+    if (!isPlaying) {
         startMusic();
         entryOverlay.classList.add('fade-out');
     }
 };
-
-startBtn.addEventListener('click', handleInteraction);
-document.addEventListener('touchstart', handleInteraction, { once: true });
-document.addEventListener('mousedown', handleInteraction, { once: true });
-
-function startMusic() {
-    player.unMute();
-    player.setVolume(100);
-    player.playVideo();
-    musicToggle.classList.add('playing');
-    musicText.textContent = "Pause Music";
-    isPlaying = true;
-}
 
 musicToggle.addEventListener('click', (e) => {
     e.stopPropagation(); // Prevent main document click from firing

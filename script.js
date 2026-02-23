@@ -134,10 +134,46 @@ if (slider) {
             emoji.style.transform = 'scale(1.5)';
             finalMessage.classList.remove('hidden');
             finalMessage.style.display = 'block';
+
+            // Reveal the Gift Button
+            const giftBtn = document.getElementById('gift-btn');
+            if (giftBtn) giftBtn.classList.remove('hidden');
+
             createExplosion();
         }
     });
 }
+
+// Video Modal Logic
+const giftBtn = document.getElementById('gift-btn');
+const modal = document.getElementById('video-modal');
+const closeModal = document.querySelector('.close-modal');
+const video = document.getElementById('jaanu-video');
+
+if (giftBtn && modal) {
+    giftBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+        if (player) player.pauseVideo(); // Pause the background song
+        video.play();
+    });
+}
+
+if (closeModal) {
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        video.pause();
+        if (player) player.playVideo(); // Resume the song
+    });
+}
+
+// Close modal if clicking outside the video
+window.addEventListener('click', (e) => {
+    if (e.target == modal) {
+        modal.classList.add('hidden');
+        video.pause();
+        if (player) player.playVideo();
+    }
+});
 
 function assignPunishment(type) {
     const text = document.getElementById('punishment-text');
